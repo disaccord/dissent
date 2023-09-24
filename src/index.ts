@@ -1,7 +1,11 @@
 import * as espree from "espree";
+import { createHash } from "crypto"
 
+function hashString(input: string): string {
+    return createHash("sha1").update(input).digest("hex")
+}
 function hashElement(element: any): string {
-    return new Bun.CryptoHasher("sha1").update(JSON.stringify({start: element.start, end: element.end})).digest("hex")
+    return hashString(JSON.stringify({start: element.start, end: element.end}))
 }
 
 function objectHash(element: any) {
@@ -38,7 +42,7 @@ function walk(body: any) {
     }
 }
 
-export async function hash(input: string): Promise<any> {
+export async function hash(input: string): Promise<string> {
     const ast = espree.parse(input)
     const func = ast.body.find((a: any) => a.type === "FunctionDeclaration")
     let funcIdentifier = func.id
@@ -50,6 +54,6 @@ export async function hash(input: string): Promise<any> {
 
     const body = func.body
     walk(body.body)
-    return new Bun.CryptoHasher("sha1").update(JSON.stringify(func)).digest("hex")
+    return hashString(JSON.stringify(func))
 }
 

@@ -1,15 +1,20 @@
-# @disaccord/dissent
+# dissent
 
-To install dependencies:
+A way of creating a hash for a function that won't change if variable names change. This is useful for discord client mods & mappings.
 
-```bash
-bun install
+To use;
+```sh
+npm install @disaccord/dissent
 ```
 
-To run:
+The API really has one function you care about;
+```js
+import fs from "fs"
+import { hash } from "@disaccord/dissent"
 
-```bash
-bun run src/index.ts
+const testFunction = fs.readFileSync("./modulefun22-22.js")
+
+const hash = hash(testModule)
+
+console.log("Function Hash: " + hash)
 ```
-
-This project was created using `bun init` in bun v1.0.2. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.

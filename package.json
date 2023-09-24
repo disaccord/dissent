@@ -3,13 +3,13 @@
   "main": "src/index.ts",
   "version": "0.1.0",
   "type": "module",
-  "devDependencies": {
-    "bun-types": "latest"
-  },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
     "espree": "^9.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.4"
   }
 }
